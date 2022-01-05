@@ -91,3 +91,5 @@ As the author of [the post](https://medium.com/@deckarep/gos-extended-concurrenc
 Is it any better than slices? Probably not. As for speed, I timed the execution of both programs, they ran pretty close. These examples are far too simple to see any significant difference in runtime. Channels in general are slower and more expensive than slices. Since there is no meaningful data being passed between the goroutines, it's probably a wasted effort. So why would I do it this way? Well, I like simple code. But that might not be enough of a reason. If the cost of serial processing of each batch outweighs the cost of using a channel, it might be worth a consideration!
 
 *Note: Code snippets on this post are available [here](https://github.com/pnawalramka/pnawalramka.github.io-code-examples).*
+
+This content is also available [here](https://dzone.com/articles/batch-processing-in-go).
