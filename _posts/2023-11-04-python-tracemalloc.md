@@ -18,6 +18,7 @@ The profiler works by letting you take a snapshot of memory during runtime. Ther
 I will go through an example that simulates constant growing memory (similar to a leak) and how to use the tracemalloc module to display statistics and eventually trace the line of code introducing that leak.
 
 
+
 ### Tracing a memory leak
 
 Here is a one-liner function called `mem_leaker()` that will be used to simulate the memory leak. It grows a global array by ten thousand elements every time it is invoked.
@@ -127,6 +128,7 @@ The output looks like this.
 At the top of the list, numpy's numeric.py allocated 78.2 Kb of memory. The tracemalloc module itself will also use some memory for profiling. That should be ignored during observation.
 
 
+
 ### Comparing snapshots and observing trends
 
 Now, in order to debug further, The code compared the first snapshot with each subsequent snapshot to see the top ten differences using compare().
@@ -163,6 +165,7 @@ A clear cumulative trend can be seen here in the allocation done by `numeric.py`
 It is constantly growing trends like this that eventually lead to a code problem if the growth pattern is unexpected.
 
 
+
 ### See a traceback
 
 The last thing in the example was to print the traceback for the largest memory block for more granularity. In this case, the largest block is one from numeric.py. The filter_traces() method is very helpful in eliminating noise when debugging long traces.
@@ -190,8 +193,10 @@ The trace looks like this.
 This trace leads from the application code to the line in the numpy library, where the allocation actually takes place. You can look at the source code [here](https://github.com/numpy/numpy/blob/main/numpy/core/numeric.py#L204).
 
 
+
 ### Conclusion
 Here, you saw a simple demonstration of using Python stdlib's tracemalloc module to observe various memory related statistics, compared snapshots to see the allocation deltas and used all this information to trace back to the code using a substantial amount of memory. In large applications, it may take some time to narrow down scope and find the line of code introducing a leak. The tracemalloc module provides all the necessary APIs to do so, and it just works out of the box.
+
 
 
 ### References
