@@ -20,7 +20,7 @@ Another common use of a loop device is with ISO images of installable operating 
 ### Creating a Loop Device in Linux
 These commands require root privilege.
 
-1. Create a large regular file on disk that will be used to create the loop device.
+1\. Create a large regular file on disk that will be used to create the loop device.
 
 ```
 # dd if=/dev/zero of=/loopfile bs=1024 count=51200
@@ -37,7 +37,7 @@ This command creates a 50Mb file called loopfile filled with zeros.
 If you already have an image file that you want to mount as a loop device, then you can skip this step.
 
 
-2. Create a loop device with the large file created above.
+2\. Create a loop device with the large file created above.
 
 There may be some loop devices already created. Run the following command to find the first available device node.
 
@@ -56,7 +56,7 @@ So we can safely use /dev/loop1 to create our loop device. Create the loop devic
 If you see no errors, the regular file `/loopfile` is now associated with the loop device `/dev/loop1`.
 
 
-3. Confirm creation of the loop device
+3\. Confirm creation of the loop device
 
 ```
 # losetup /dev/loop1
@@ -69,7 +69,7 @@ If you see no errors, the regular file `/loopfile` is now associated with the lo
 ### Creating a Linux Filesystem With the Loop Device
 You can now create a normal Linux filesystem with this loop device.
 
-1. Create an ext4 filesystem using /dev/loop1.
+1\. Create an ext4 filesystem using /dev/loop1.
 
 ```
 # mkfs -t ext4 -v /dev/loop1
@@ -116,14 +116,14 @@ Writing superblocks and filesystem accounting information: done
 ```
 
 
-2. Create a mount point for the filesystem.
+2\. Create a mount point for the filesystem.
 
 ```
 # mkdir /mnt/loopfs
 ```
 
 
-3. Mount the newly created filesystem.
+3\. Mount the newly created filesystem.
 
 ```
 # mount -t ext4 /dev/loop1 /mnt/loopfs
@@ -131,7 +131,7 @@ Writing superblocks and filesystem accounting information: done
 This command mounts the loop device as a normal Linux ext4 filesystem, on which normal filesystem operations can be performed.
 
 
-4. Check disk usage of the file system.
+4\. Check disk usage of the file system.
 
 ```
 # df -h /dev/loop1
@@ -141,7 +141,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/loop1       45M   48K   41M   1% /mnt/loopfs
 ```
 
-5. Use tune2fs to see the filesystem settings.
+5\. Use tune2fs to see the filesystem settings.
 
 ```
 #  tune2fs -l /dev/loop1
@@ -238,7 +238,7 @@ Checksum:                 0x3b8c797a
 ```
 
 
-6. To unmount the filesystem and delete the loop device, run the following commands.
+6\. To unmount the filesystem and delete the loop device, run the following commands.
 
 ```
 # umount /mnt/loopfs/
